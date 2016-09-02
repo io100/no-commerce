@@ -1,7 +1,7 @@
 # Node Express app with nginx postgres nodemon dev cluster
 
-This is a full stack boilerplate using a nginx reverse proxy/load balancer for
-a Node Express app backed by Postgres and Elasticsearch. It was forked from
+This is a full stack Docker-based boilerplate. It includes a nginx reverse proxy/load balancer for
+a dual-instance Express app backed by Postgres and Elasticsearch. It was forked from
 [here](https://github.com/siyangbi/docker-nginx-node-postgres-elasticsearch).
 
 ## Prerequisites
@@ -10,11 +10,11 @@ Install [Docker](https://www.docker.com/) on your system.
 
 * [Install instructions](https://docs.docker.com/installation/mac/) for Mac OS X
 
-
-
-# How to use this repo after install docker-machine
-
 ## TL;DR
+
+If you can't wait to see it in action, run `docker-compose up` from the app directory then go to `http://localhost` in your browser. Done!
+
+## Testing your environment
 
 Test your Docker commands.
 ```
