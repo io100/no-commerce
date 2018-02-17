@@ -11,5 +11,6 @@ npm-debug.log
 #code coverage
 node/node_modules
 .DS_Store
+node_modules
 
 node/npm-debug.log

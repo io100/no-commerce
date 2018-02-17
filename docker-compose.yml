@@ -15,11 +15,10 @@ services:
         https_proxy: "${https_proxy}"
         NODE_PATH: "lib"
         NODE_ENV: "production"
-        POSTGRES_USER: "youruser"
-        POSTGRES_PASSWORD: "yourpw"
-      volumes: ["./node/.:/src"]
-      links: ["postgres", "elasticsearch"]
-      ports: ["8080:8080"]
+        POSTGRES_USER: "admin"
+        POSTGRES_PASSWORD: "password"
+      links: ["postgres", "mongo"]
+      ports: ["5000:5000"]
   node2:
       build:
         context: "./node"
@@ -31,20 +30,16 @@ services:
         https_proxy: "${https_proxy}"
         NODE_PATH: "lib"
         NODE_ENV: "production"
-        POSTGRES_USER: "youruser"
-        POSTGRES_PASSWORD: "yourpw"
-      volumes: ["./node/.:/src"]
-      links: ["postgres", "elasticsearch"]
-      ports: [8080]
+        POSTGRES_USER: "admin"
+        POSTGRES_PASSWORD: "password"
+      links: ["postgres", "mongo"]
+      ports: [5000]
   postgres:
       image: "postgres"
       environment:
-          POSTGRES_USER: "youruser"
-          POSTGRES_PASSWORD: "yourpw"
+          POSTGRES_USER: "admin"
+          POSTGRES_PASSWORD: "password"
       ports: ["5432:5432"]
-  elasticsearch:
-      image: "elasticsearch"
-      environment:
-          ELASTICSEARCH_USER: "youruser"
-          ELASTICSEARCH_PASS: "yourpw"
-      ports: ["9200:9200"]
+  mongo:
+      image: mongo
+      ports: ['27017:27017']
