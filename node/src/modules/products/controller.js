@@ -1,5 +1,18 @@
 var models  = require('../../../models');
 
+
+/**
+ * @api {GET} /products Get all products
+ * @apiPermission public
+ * @apiVersion 1.0.0
+ * @apiName Get All Products
+ * @apiGroup Products
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X GET localhost:5000/products
+ */
+
+
 export async function getAllProducts(ctx) {
 
    const products = await models.products.findAll({});
@@ -14,6 +27,17 @@ export async function getAllProducts(ctx) {
    }
 
 }
+
+/**
+ * @api {POST} /products Get all products
+ * @apiPermission admin
+ * @apiVersion 1.0.0
+ * @apiName Add (Create) Product
+ * @apiGroup Products 
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X POST localhost:5000/products
+ */
 
 
 export async function addProduct(ctx) {
@@ -31,6 +55,17 @@ export async function addProduct(ctx) {
     }
 
 }
+
+/**
+ * @api {DELETE} /products Get all products
+ * @apiPermission admin
+ * @apiVersion 1.0.0
+ * @apiName Delete Product
+ * @apiGroup Products 
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X DELETE localhost:5000/products
+ */
 
 
 export async function removeProduct(ctx) {
@@ -51,6 +86,17 @@ export async function removeProduct(ctx) {
 
 }
 
+/**
+ * @api {PUT} /products Get all products
+ * @apiPermission admin
+ * @apiVersion 1.0.0
+ * @apiName Update Product
+ * @apiGroup Products 
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X PUT localhost:5000/products
+ */
+
 export async function updateProduct(ctx) {
 
     const params = ctx.body;
@@ -65,6 +111,17 @@ export async function updateProduct(ctx) {
     }
 
 }
+
+/**
+ * @api {POST} /products Get all products
+ * @apiPermission admin
+ * @apiVersion 1.0.0
+ * @apiName Add Product Image
+ * @apiGroup Products 
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X POST localhost:5000/products
+ */
 
 export async function addImage(ctx) {
     // TODO
