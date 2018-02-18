@@ -5,12 +5,32 @@ export const baseUrl = '/products'
 
 export default [
   { 
-    // Get All Products
     method: 'GET',
     route: '/',
     handlers: [
       //ensureUser,
       productsController.getAllProducts
     ]
-  }
+  },
+  {
+    method: 'POST',
+    route: '/',
+    handlers: [
+        productsController.addProduct
+    ]
+  },
+  {
+      method: 'PUT',
+      route: '/',
+      handlers: [
+          productsController.updateProduct
+      ]
+  },
+  {
+      method: 'DELETE',
+      route: '/',
+      handlers: [
+          productsController.removeProduct
+      ]
+    }
 ]

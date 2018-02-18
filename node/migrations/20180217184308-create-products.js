@@ -8,44 +8,47 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      msrp: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      street: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      length: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      width: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      height: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      discontinue_date: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      images_array: {
+        type: Sequelize.ARRAY(Sequelize.TEXT)
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      name: {
-        allowNull: false,
-        type: Sequelize.TEXT
-      },
-      msrp: {
-        allowNull: false,
-        type: Sequelize.FLOAT
-      },
-      street: {
-        allowNull: false,
-        type: Sequelize.FLOAT
-      },
-      description: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      length: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      width: {
-        allowNull: true, 
-        type: Sequelize.TEXT
-      },
-      height: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      discontinue_date: {
-        allowNull: true, 
         type: Sequelize.DATE
       }
     });
