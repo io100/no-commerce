@@ -171,7 +171,7 @@ export async function checkUserRole(ctx) {
     roles,
   };
 }
-wz
+
 export async function updateRole(ctx) {
 
   const id = ctx.request.body.id
