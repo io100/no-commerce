@@ -1,8 +1,7 @@
 import postmark from 'postmark';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import User from '../../models/users';
-import * as imageService from '../../utils/imageService';
+import User from '../../../models/users';
 import { isJsonString } from '../../utils/utils';
 import acl from '../auth/permissions';
 
@@ -50,7 +49,7 @@ export async function changePassword(ctx) {
     throw new Error('Password and confirm password do not match');
   }
 
-  const user = await User.findById(ctx.params.id, '-password')
+  const user = await User.findOne({where: {id:ctx.params.id}});
 
   user.password = newPassword;
 
@@ -81,7 +80,7 @@ export async function forgotPassword(ctx, next) {
       resolve(token);
     });
   }).then(async (token) => {
-    const user = await User.findOne({ email: ctx.request.body.email }, '-password');
+    const user = await User.findOne({where: {email: ctx.request.body.email }});
     console.log(`A reset password token has been generated for ${user.email}`);
 
     if (!user) {
@@ -109,15 +108,6 @@ export async function forgotPassword(ctx, next) {
     if (!client.sendEmailWithTemplate) {
       ctx.throw(500, 'Email client failed.');
     }
-
-    client.sendEmailWithTemplate({
-        "From": "submissions@thoughtcatalog.com",
-        "TemplateId": 2716422,
-        "To": user.email,
-        "TemplateModel": {
-          "url": ``
-        }
-    });
 
     ctx.body = {
       message: 'Forgot password email sent successfully',
@@ -181,22 +171,13 @@ export async function checkUserRole(ctx) {
     roles,
   };
 }
-
-/**
-* Reads our google audit sheet for users marked with restore === true,
-* creates them in our mongo db.  This is in case we lose data and must restore from our sheet.
-* Should never happen, but it happened before and this util can help us get back up
-*/
-export async function seedUsersFromSheet(ctx) {
-  createUsersFromSheet('PENDING');
-}
-
+wz
 export async function updateRole(ctx) {
 
   const id = ctx.request.body.id
   const role = ctx.request.body.role
 
-  const user = await User.findById(id)
+  const user = await User.findByOne({where: {id: id}})
 
   user.role = role;
 
