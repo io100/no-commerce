@@ -1,5 +1,5 @@
 import passport from 'koa-passport'
-import User from '../src/models/users'
+import User from '../models/users'
 import { Strategy } from 'passport-local'
 
 const Raven = require('raven');
@@ -14,7 +14,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id, '-password')
+    const user = await User.findOne({where: {id: id}})
     done(null, user)
   } catch (err) {
     Raven.captureException(`Error: ${err} ID: ${ID}`)
@@ -32,8 +32,8 @@ passport.use('local', new Strategy({
 }, async (email, password, done) => {
 
   try {
-    const escapedEmail = escapeRegExp(email);
-    const user = await User.findOne({email: {$regex: `^${escapedEmail}\/?$`, $options: "i"}})
+    const lowerCaseEmail = email.toLowerCase();
+    const user = await User.findOne({where: {email: email }})
     if (!user) { Raven.captureException(`${email} doesn't exist.`);  return done(null, false);}
 
     try {
