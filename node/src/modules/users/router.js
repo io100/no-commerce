@@ -6,14 +6,6 @@ export const baseUrl = '/users'
 
 export default [
   {
-    method: 'GET',
-    route: '/published',
-    handlers: [
-      ensureUser,
-      userController.getPublishedUsers
-    ]
-  },
-  {
     method: 'POST',
     route: '/check-role/:id',
     handlers: [
@@ -41,14 +33,6 @@ export default [
     route: '/:email/exists',
     handlers: [
       userController.getDoesUserExist
-    ]
-  },
-  {
-    method: 'POST',
-    route: '/:id/reject',
-    handlers: [
-      ensureUser,
-      userController.rejectUser
     ]
   },
   {
