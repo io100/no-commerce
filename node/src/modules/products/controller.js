@@ -8,6 +8,18 @@ var models  = require('../../../models');
  * @apiName Get All Products
  * @apiGroup Products
  *
+ * @apiSuccessExample Success-Response:
+ *      HTTP/1.1 200 OK
+ *     {
+ *       "status": "success",
+ *       "count": 20,
+ *       "products": {
+ *           "data": {
+ *               ...products
+ *           }
+ *      }
+ * 
+ *  
  * @apiExample Example usage:
  * curl -H "Content-Type: application/json" -X GET localhost:5000/products
  */
@@ -21,7 +33,7 @@ export async function getAllProducts(ctx) {
     ctx.body = {
        status: 'success',
        count: products.length,
-       users: {
+       products: {
            data: products
        }
    }
@@ -118,6 +130,8 @@ export async function updateProduct(ctx) {
  * @apiVersion 1.0.0
  * @apiName Add Product Image
  * @apiGroup Products 
+ * 
+ * @apiParam {Image} Base64 DataURI
  *
  * @apiExample Example usage:
  * curl -H "Content-Type: application/json" -X POST localhost:5000/products
