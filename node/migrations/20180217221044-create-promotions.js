@@ -25,7 +25,7 @@ module.exports = {
          allowNull: false
       },
       applicable_products: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
          allowNull: true,
       },
       createdAt: {
