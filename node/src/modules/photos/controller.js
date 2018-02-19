@@ -4,7 +4,6 @@ import Photo from '../../models/photos';
 const getBucketLocation = require('../../utils/awsS3Api').getBucketLocation;
 const asyncUploadFileToS3 = require('../../utils/awsS3Api').asyncUploadFileToS3;
 
-import { S3_BUCKET_URL, IMGIX_DELIVERY_URL } from '../../constants/appConstants';
 
 import User from '../../models/users';
 /**
