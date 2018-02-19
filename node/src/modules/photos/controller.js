@@ -31,21 +31,26 @@ export async function createPhoto(ctx) {
   const imageName = ctx.request.body.name;
   const imageType = ctx.request.body.content_type;
   const imageCategory = ctx.request.body.category;
+  const object_id = ctx.request.body.object_id;
 
   const awsService = new AWSService()
 
   awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType)
     .then(async (data) => {
-      console.log(data)
+      
         try {
-        
           let attachment = await attachments.build({
-            
-
+            type: 'image',
+            category: imageCategory,
+            value: data.location
           });
 
-          let attachment_lookup =  await to_attachments.build({
+          const attachment_id = attachment.id;
 
+          let attachment_lookup =  await to_attachments.build({
+            attachment_id: attachment_id,
+            object_id: object_id,
+            type: imageCategory
           });
 
           attachment = await attachment.save();
