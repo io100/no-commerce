@@ -6,7 +6,7 @@ export default (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     date: DataTypes.DATE
   }, {});
-  analytics.associate = function(models) {
+  analytics.associate = (models) => {
     // associations can be defined here
   };
   return analytics;

@@ -7,7 +7,7 @@ export default (sequelize, DataTypes) => {
     type: DataTypes.INTEGER,
     applicable_products: DataTypes.ARRAY
   }, {});
-  promotions.associate = function(models) {
+  promotions.associate = (models) => {
     // associations can be defined here
   };
   return promotions;

@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
     phone_number: DataTypes.TEXT,
     taxable: DataTypes.BOOLEAN
   }, {});
-  addresses.associate = function(models) {
+  addresses.associate = (models) => {
     // associations can be defined here
   };
   return addresses;

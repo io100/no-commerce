@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
     shipping: DataTypes.FLOAT,
     total: DataTypes.FLOAT
   }, {});
-  orders.associate = function(models) {
+  orders.associate = (models) => {
     // associations can be defined here
   };
   return orders;

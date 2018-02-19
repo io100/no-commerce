@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
     discontinue_date: DataTypes.TEXT,
     images_array: DataTypes.ARRAY
   }, {});
-  products.associate = function(models) {
+  products.associate = (models) => {
     // associations can be defined here
   };
   return products;

@@ -5,8 +5,8 @@ export default (sequelize, DataTypes) => {
     reset_password_token: DataTypes.STRING,
     reset_password_expires: DataTypes.DATE
   }, {});
-  create - user - token.associate = function(models) {
+  create_user_token.associate = (models) => {
     // associations can be defined here
   };
-  return create - user - token;
+  return create_user_token;
 };

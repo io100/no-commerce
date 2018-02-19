@@ -5,7 +5,7 @@ export default (sequelize, DataTypes) => {
     attachment_id: DataTypes.INTEGER,
     type: DataTypes.STRING
   }, {});
-  to_attachments.associate = function(models) {
+  to_attachments.associate = (models) => {
     // associations can be defined here
   };
   return to_attachments;

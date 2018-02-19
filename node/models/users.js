@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
     state: DataTypes.TEXT,
     country: DataTypes.TEXT
   }, {});
-  users.associate = function(models) {
+  users.associate = (models) => {
     // associations can be defined here
   };
   return users;

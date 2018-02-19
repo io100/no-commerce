@@ -7,7 +7,7 @@ export default (sequelize, DataTypes) => {
     object_id: DataTypes.INTEGER,
     attachment_id: DataTypes.INTEGER
   }, {});
-  attachments.associate = function(models) {
+  attachments.associate = (models) => {
     // associations can be defined here
   };
   return attachments;
