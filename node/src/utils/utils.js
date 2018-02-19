@@ -13,11 +13,6 @@ export function trimBase64String(base64String) {
   return trimmedBase64;
 }
 
-String.prototype.replaceAll = function(str1, str2, ignore)
-{
-  return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-}
-
 export function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
