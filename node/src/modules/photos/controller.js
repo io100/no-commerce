@@ -1,7 +1,6 @@
 import * as attachments from '../../../models/attachments'
 import * as to_attachments from '../../../models/to_attachments'
-import { getBucketLocation } from '../../utils/awsS3Api'
-import { asyncUploadFileToS3 } from '../../utils/awsS3Api'
+import AWSService from '../../utils/awsS3Api'
 
 /**
  * @api {post} /photo/
@@ -33,17 +32,19 @@ export async function createPhoto(ctx) {
   const imageType = ctx.request.body.content_type;
   const imageCategory = ctx.request.body.category;
 
-  asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType)
+  const awsService = new AWSService()
+
+  awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType)
     .then(async (data) => {
       console.log(data)
         try {
         
-          let attachment = attachments.build({
+          let attachment = await attachments.build({
             
 
           });
 
-          let attachment_lookup = to_attachments.build({
+          let attachment_lookup =  await to_attachments.build({
 
           });
 

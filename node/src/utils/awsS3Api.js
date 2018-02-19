@@ -6,23 +6,22 @@ const S3 = new aws.S3({ signatureVersion: 'v4' });
 const bucketName = process.env.S3_BUCKET_NAME;
 
 
-module.exports = {
-
-  getBucketLocation: function() {
+class AWSService {
+  
+  getBucketLocation() {
     const params = {
       Bucket: bucketName
      };
-     S3.getBucketLocation(params, function(err, data) {
+     S3.getBucketLocation(params, (err, data) => {
        if (err) console.log(err, err.stack); // an error occurred
        else     console.log(data);           // successful response
        return data;
      });
-  },
+  }
 
-  //@TODO Remove default location parameter as `uploads/images/`, fix all instances that require this path to pass it in
-  asyncUploadFileToS3: function(base64String, fileName, contentType, location = 'uploads/images/') {
+  asyncUploadFileToS3(base64String, fileName, contentType, location = 'uploads/images/') {
     return new Promise((resolve, reject) => {
-      var params = {
+      const params = {
           'ACL': 'public-read',
           'Bucket': bucketName,
           'Key': location + fileName,
@@ -31,7 +30,8 @@ module.exports = {
           'ContentType': contentType
        };
 
-       S3.upload(params, function(err, data){
+       S3.upload(params, (err, data) => {
+          console.log(data)
           if(err) reject(err);
           resolve(data);
        });
@@ -39,3 +39,5 @@ module.exports = {
 
   }
 }
+
+export default AWSService;
