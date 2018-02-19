@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.FLOAT
       },
       taxable: {
-        type: Sequelize.BOOL
+        type: Sequelize.BOOLEAN
       },
       shipping: {
         type: Sequelize.FLOAT
