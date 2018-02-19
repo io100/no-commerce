@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var orders = sequelize.define('orders', {
+export default (sequelize, DataTypes) => {
+  let orders = sequelize.define('orders', {
     user_id: DataTypes.INTEGER,
     billing_address_id: DataTypes.INTEGER,
     shipping_address_id: DataTypes.INTEGER,

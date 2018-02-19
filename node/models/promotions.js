@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var promotions = sequelize.define('promotions', {
+export default (sequelize, DataTypes) => {
+  let promotions = sequelize.define('promotions', {
     name: DataTypes.TEXT,
     starts: DataTypes.DATE,
     expires: DataTypes.DATE,

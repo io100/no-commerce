@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var users = sequelize.define('users', {
+export default (sequelize, DataTypes) => {
+  let users = sequelize.define('users', {
     email: DataTypes.TEXT,
     password: DataTypes.TEXT,
     role: DataTypes.INTEGER,

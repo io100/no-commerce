@@ -1,5 +1,5 @@
 import passport from 'koa-passport'
-import User from '../models/users'
+import users from '../models/users'
 import { Strategy } from 'passport-local'
 
 const Raven = require('raven');

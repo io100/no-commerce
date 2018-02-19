@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var products = sequelize.define('products', {
+export default (sequelize, DataTypes) => {
+  let products = sequelize.define('products', {
     name: DataTypes.TEXT,
     msrp: DataTypes.FLOAT,
     street: DataTypes.FLOAT,

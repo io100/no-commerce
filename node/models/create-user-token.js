@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var create - user - token = sequelize.define('create-user-token', {
+export default (sequelize, DataTypes) => {
+  let create_user_token = sequelize.define('create-user-token', {
     user_id: DataTypes.INTEGER,
     reset_password_token: DataTypes.STRING,
     reset_password_expires: DataTypes.DATE

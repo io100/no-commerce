@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var analytics = sequelize.define('analytics', {
+export default (sequelize, DataTypes) => {
+  let analytics = sequelize.define('analytics', {
     subject: DataTypes.STRING,
     action: DataTypes.STRING,
     user_id: DataTypes.INTEGER,

@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var attachments = sequelize.define('attachments', {
+export default (sequelize, DataTypes) => {
+  let attachments = sequelize.define('attachments', {
     type: DataTypes.STRING,
     catagory: DataTypes.STRING,
     value: DataTypes.STRING,

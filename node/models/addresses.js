@@ -1,6 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var addresses = sequelize.define('addresses', {
+export default (sequelize, DataTypes) => {
+  let addresses = sequelize.define('addresses', {
     first_name: DataTypes.TEXT,
     last_name: DataTypes.TEXT,
     street_address_1: DataTypes.TEXT,
