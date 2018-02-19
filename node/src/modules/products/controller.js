@@ -1,4 +1,4 @@
-var models  = require('../../../models');
+import *  as models from '../../../models';
 
 
 /**
@@ -138,5 +138,5 @@ export async function updateProduct(ctx) {
  */
 
 export async function addImage(ctx) {
-    
+
 }
