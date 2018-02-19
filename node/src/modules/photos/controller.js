@@ -35,31 +35,28 @@ export async function createPhoto(ctx) {
 
   const awsService = new AWSService()
 
-  awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType)
-    .then(async (data) => {
-      
-        try {
-          let attachment = await attachments.build({
-            type: 'image',
-            category: imageCategory,
-            value: data.location
-          });
+  const data = await awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType);
 
-          const attachment_id = attachment.id;
+  try {
+      let attachment = await attachments.create({
+        type: 'image',
+        category: imageCategory,
+        value: data.location
+      });
 
-          let attachment_lookup =  await to_attachments.build({
-            attachment_id: attachment_id,
-            object_id: object_id,
-            type: imageCategory
-          });
+      console.log(attachment)
+      const attachment_id = attachment.id;
 
-          attachment = await attachment.save();
-          attachment_lookup = await attachment_lookup.save();
+      let attachment_lookup =  await to_attachments.create({
+        attachment_id: attachment_id,
+        object_id: object_id,
+        type: imageCategory
+      });
 
-        } catch (err) {
-          ctx.throw(422, err.message)
-        }
-  });
+    } catch (err) {
+      ctx.throw(422, err.message)
+    }
+
   const response = 200;
 
   ctx.body = {
