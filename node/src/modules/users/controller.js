@@ -1,7 +1,8 @@
 import postmark from 'postmark';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import User from '../../../models/users';
+import user from '../../../models/users';
+import promotions from '../../../models/users';
 import { isJsonString } from '../../utils/utils';
 import acl from '../auth/permissions';
 
@@ -92,7 +93,6 @@ export async function forgotPassword(ctx, next) {
       ctx.body = {
         status: 404
       }
-
     }
 
     //@TODO:  For better security, we should save these tokens in a different table with their hash as the ID
@@ -103,6 +103,8 @@ export async function forgotPassword(ctx, next) {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
+
+    //Email
     const client = new postmark.Client("");
 
     if (!client.sendEmailWithTemplate) {
@@ -127,7 +129,7 @@ export async function forgotPassword(ctx, next) {
 * We will use the response from this request in order to check if we should even render the form for resetting
 */
 export async function canUserResetPasword(ctx) {
-  const user = await User.findOne({ resetPasswordToken: ctx.request.body.resetPasswordToken, resetPasswordExpires: { $gt: Date.now() } }, '-password');
+  const user = await user.findOne({ where: {reset_password_token: ctx.request.body.resetPasswordToken, reset_token_expiration: { gte: Date.now() }}});
   if (!user) {
     ctx.throw(404);
   }
@@ -146,7 +148,7 @@ export async function canUserResetPasword(ctx) {
 */
 
 export async function resetPassword(ctx) {
-  const user = await User.findOne({ resetPasswordToken: ctx.request.body.resetPasswordToken, resetPasswordExpires: { $gt: Date.now() } }, '-password');
+  const user = await promotions.findOne({ reset_password_token: ctx.request.body.resetPasswordToken, reset_token_expires: { gte: Date.now() } });
   if (!user) {
     ctx.throw(404);
   }

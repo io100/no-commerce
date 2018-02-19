@@ -21,9 +21,6 @@ if(process.env.SENTRY_URL !== null) {
 const app = new Koa()
 app.keys = [config.session]
 
-mongoose.Promise = global.Promise
-mongoose.connect(config.database)
-
 app.use(cors());
 app.use(convert(logger()))
 app.use(async (ctx, next) => {
@@ -56,11 +53,9 @@ app.listen(config.port, () => {
 });
 
 
-process
-  .on('unhandledRejection', (reason) => {
+process.on('unhandledRejection', (reason) => {
     console.log('Unhandled Rejection at Promise', reason);
-  })
-  .on('uncaughtException', (err) => {
+  }).on('uncaughtException', (err) => {
     console.log('An exception went uncaught somewhere in the application', err);
     process.exit(1);
   });
