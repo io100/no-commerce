@@ -22,10 +22,6 @@ passport.deserializeUser(async (id, done) => {
   }
 })
 
-function escapeRegExp(str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-}
-
 passport.use('local', new Strategy({
   usernameField: 'email',
   passwordField: 'password'
