@@ -6,9 +6,6 @@ import promotions from '../../../models/users';
 import { isJsonString } from '../../utils/utils';
 import acl from '../auth/permissions';
 
-
-
-
 /**
  * @api {delete} /users/:id Delete a user
  * @apiPermission
@@ -179,7 +176,7 @@ export async function updateRole(ctx) {
   const id = ctx.request.body.id
   const role = ctx.request.body.role
 
-  const user = await User.findByOne({where: {id: id}})
+  const user = await User.findByOne({where: {id: id}});
 
   user.role = role;
 
