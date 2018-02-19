@@ -4,10 +4,10 @@ export default (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     billing_address_id: DataTypes.INTEGER,
     shipping_address_id: DataTypes.INTEGER,
-    products: DataTypes.ARRAY,
+    products: DataTypes.ARRAY(DataTypes.INTEGER),
     status: DataTypes.INTEGER,
     subtotal: DataTypes.FLOAT,
-    taxable: DataTypes.BOOL,
+    taxable: DataTypes.BOOLEAN,
     shipping: DataTypes.FLOAT,
     total: DataTypes.FLOAT
   }, {});

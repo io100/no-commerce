@@ -9,7 +9,7 @@ export default (sequelize, DataTypes) => {
     width: DataTypes.TEXT,
     height: DataTypes.TEXT,
     discontinue_date: DataTypes.TEXT,
-    images_array: DataTypes.ARRAY
+    images_array: DataTypes.ARRAY(DataTypes.STRING)
   }, {});
   products.associate = (models) => {
     // associations can be defined here

@@ -5,9 +5,10 @@ export default (sequelize, DataTypes) => {
     starts: DataTypes.DATE,
     expires: DataTypes.DATE,
     type: DataTypes.INTEGER,
-    applicable_products: DataTypes.ARRAY
+    applicable_products: DataTypes.ARRAY(DataTypes.INTEGER)
   }, {});
-  promotions.associate = (models) => {
+  promotions.associate = (models) =>
+   {
     // associations can be defined here
   };
   return promotions;

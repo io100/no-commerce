@@ -1,9 +1,5 @@
-const async = require('async');
-const fs = require('fs');
-
-import User from '../models/users';
-
-
+import async from 'async'
+import fs from 'fs'
 /*
 * Removes the string `base64,` from in front of a base64 string
 */
