@@ -1,5 +1,5 @@
-import attachments from '../../../attachments'
-import to_attachments from '../../../to_attachments'
+import * as attachments from '../../../models/attachments'
+import * as to_attachments from '../../../models/to_attachments'
 
 
 const getBucketLocation = require('../../utils/awsS3Api').getBucketLocation;

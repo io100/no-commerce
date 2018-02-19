@@ -1,20 +1,20 @@
 {
   "development": {
-    "username": "",
+    "username": null,
     "password": null,
     "database": "no_commerce_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "",
+    "username": null,
     "password": null,
     "database": "no_commerce_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "",
+    "username": null,
     "password": null,
     "database": "no_commerce_production",
     "host": "127.0.0.1",

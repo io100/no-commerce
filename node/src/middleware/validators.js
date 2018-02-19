@@ -1,4 +1,4 @@
-import User from '../models/users'
+import * as uesrs from '../../models/users'
 import config from '../../config'
 import { getToken } from '../utils/auth'
 import { verify } from 'jsonwebtoken'

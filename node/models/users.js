@@ -1,5 +1,5 @@
 'use strict';
-export default (sequelize, DataTypes) => {
+export default(sequelize, DataTypes) => {
   let users = sequelize.define('users', {
     email: DataTypes.TEXT,
     password: DataTypes.TEXT,
