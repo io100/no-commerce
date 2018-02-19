@@ -138,5 +138,5 @@ export async function updateProduct(ctx) {
  */
 
 export async function addImage(ctx) {
-    // TODO
+    
 }

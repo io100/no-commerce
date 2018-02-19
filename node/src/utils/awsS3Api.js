@@ -1,11 +1,11 @@
-var aws = require('aws-sdk');
-var S3 = new aws.S3({ signatureVersion: 'v4' });
+const aws = require('aws-sdk');
+const S3 = new aws.S3({ signatureVersion: 'v4' });
 
 const bucketName = process.env.S3_BUCKET_NAME;
 module.exports = {
 
   getBucketLocation: function() {
-    var params = {
+    const params = {
       Bucket: bucketName
      };
      S3.getBucketLocation(params, function(err, data) {
