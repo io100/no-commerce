@@ -1,9 +1,7 @@
 import * as attachments from '../../../models/attachments'
 import * as to_attachments from '../../../models/to_attachments'
-
-
-const getBucketLocation = require('../../utils/awsS3Api').getBucketLocation;
-const asyncUploadFileToS3 = require('../../utils/awsS3Api').asyncUploadFileToS3;
+import { getBucketLocation } from '../../utils/awsS3Api'
+import { asyncUploadFileToS3 } from '../../utils/awsS3Api'
 
 /**
  * @api {post} /photo/

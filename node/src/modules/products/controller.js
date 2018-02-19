@@ -139,4 +139,7 @@ export async function updateProduct(ctx) {
 
 export async function addImage(ctx) {
 
+    const body = ctx.body;
+
+    
 }
