@@ -12,22 +12,34 @@ import { asyncUploadFileToS3 } from '../../utils/awsS3Api'
  *
  * @apiExample Example usage:
  * curl -H "Content-Type: application/json" -X POST localhost:5000/users/:id/photo
+ * 
+ * 
+ *  const data = {
+ *    request_type:'base64',
+ *    type: "profile-photo",
+ *    request_type: "base64",
+ *    file_name: file.name.split('.').length >= 2 ? file.name.split('.')[0] : file.name,
+ *    file: reader.result
+ *   }
+ * 
  */
 
+
 export async function createPhoto(ctx) {
-  const userId = ctx.params.userId;
-  const base64EncodedImage =  ctx.request.body.base64_data;
+  const base64EncodedImage =  ctx.request.body.data_uri;
   const metaDataStringPosEnd = base64EncodedImage.indexOf('base64');
   const trimmedBase64EncodedImage = base64EncodedImage.substring(metaDataStringPosEnd+7, base64EncodedImage.length-1);
-  const imageName = ctx.request.body.base64_name;
-  const imageType = ctx.request.body.base64_content_type;
-  const imageCatatony = ctx.request.body.category;
+  const imageName = ctx.request.body.name;
+  const imageType = ctx.request.body.content_type;
+  const imageCategory = ctx.request.body.category;
 
   asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType)
     .then(async (data) => {
+      console.log(data)
         try {
         
           let attachment = attachments.build({
+            
 
           });
 

@@ -1,7 +1,11 @@
-const aws = require('aws-sdk');
-const S3 = new aws.S3({ signatureVersion: 'v4' });
+import aws from 'aws-sdk';
+import dotenv from 'dotenv';
+dotenv.config();
 
+const S3 = new aws.S3({ signatureVersion: 'v4' });
 const bucketName = process.env.S3_BUCKET_NAME;
+
+
 module.exports = {
 
   getBucketLocation: function() {
@@ -17,7 +21,7 @@ module.exports = {
 
   //@TODO Remove default location parameter as `uploads/images/`, fix all instances that require this path to pass it in
   asyncUploadFileToS3: function(base64String, fileName, contentType, location = 'uploads/images/') {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       var params = {
           'ACL': 'public-read',
           'Bucket': bucketName,
@@ -28,6 +32,7 @@ module.exports = {
        };
 
        S3.upload(params, function(err, data){
+          if(err) reject(err);
           resolve(data);
        });
     })

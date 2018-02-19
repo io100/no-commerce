@@ -5,27 +5,11 @@ export const baseUrl = '/photos'
 
 export default [
   {
-    method: 'GET',
+    method: 'POST',
     route: '/',
     handlers: [
       // ensureUser,
-      photoController.getPhotos
-    ]
-  },
-  {
-    method: 'POST',
-    route: '/:id/reject',
-    handlers: [
-      // ensureUser,
-      photoController.rejectPhoto
-    ]
-  },
-  {
-    method: 'POST',
-    route: '/:id/accept',
-    handlers: [
-      // ensureUser,
-      photoController.acceptPhoto
+      photoController.createPhoto
     ]
   }
 ]

@@ -123,23 +123,3 @@ export async function updateProduct(ctx) {
     }
 
 }
-
-/**
- * @api {POST} /products Get all products
- * @apiPermission admin
- * @apiVersion 1.0.0
- * @apiName Add Product Image
- * @apiGroup Products 
- * 
- * @apiParam {Image} Base64 DataURI
- *
- * @apiExample Example usage:
- * curl -H "Content-Type: application/json" -X POST localhost:5000/products
- */
-
-export async function addImage(ctx) {
-
-    const body = ctx.body;
-
-    
-}
