@@ -1,5 +1,4 @@
 import passport from 'koa-passport'
-import { TOKEN_EXP_SECONDS } from '../../constants/appConstants';
 
 /**
  * @apiDefine TokenError
@@ -69,7 +68,7 @@ export async function authUser (ctx, next) {
 
     delete response.password
     const time = new Date();
-    time.setSeconds(time.getSeconds() + TOKEN_EXP_SECONDS);
+    time.setSeconds(time.getSeconds() + 3600);
     ctx.body = {
       token,
       exp: time,
