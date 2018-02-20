@@ -5,11 +5,11 @@ export const baseUrl = '/reporting'
 
 export default [
   {
-    method: 'POST',
-    route: '/users',
+    method: 'GET',
+    route: '/',
     handlers: [
-     ensureSystemUser,
-     reportingController.getUsersForDateRange
+     //ensureSystemUser,
+     reportingController.helloWorld
     ]
   }
 ]
