@@ -1,5 +1,4 @@
-import attachments from '../../../models/attachments'
-import to_attachments from '../../../models/to_attachments'
+import db from '../../../models/index'
 import AWSService from '../../utils/awsS3Api'
 
 /**
@@ -34,20 +33,19 @@ export async function createPhoto(ctx) {
   const imageType = ctx.request.body.content_type;
   const imageCategory = ctx.request.body.category;
   const object_id = ctx.request.body.object_id;
-
   
   const data = await awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType);
 
   try {
-      let attachment = await attachments.create({
+
+      let attachment = await db.attachments.create({
         type: 'image',
         category: imageCategory,
-        value: data.location
+        value: data.Location
       });
 
       const attachment_id = attachment.id;
-
-      let attachment_lookup =  await to_attachments.create({
+      let attachment_lookup =  await db.to_attachments.create({
         attachment_id: attachment_id,
         object_id: object_id,
         type: imageCategory
@@ -57,10 +55,8 @@ export async function createPhoto(ctx) {
       ctx.throw(422, err.message)
     }
 
- 
-  ctx.status = 200;
-  
   ctx.body = {
-    photo: ctx.request.body.photo,
+    photo: data.Location
   }
+
 }
