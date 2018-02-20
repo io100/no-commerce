@@ -1,5 +1,5 @@
-import * as attachments from '../../../models/attachments'
-import * as to_attachments from '../../../models/to_attachments'
+import attachments from '../../../models/attachments'
+import to_attachments from '../../../models/to_attachments'
 import AWSService from '../../utils/awsS3Api'
 
 /**
@@ -23,6 +23,8 @@ import AWSService from '../../utils/awsS3Api'
  * 
  */
 
+const awsService = new AWSService();
+
 
 export async function createPhoto(ctx) {
   const base64EncodedImage =  ctx.request.body.data_uri;
@@ -33,8 +35,7 @@ export async function createPhoto(ctx) {
   const imageCategory = ctx.request.body.category;
   const object_id = ctx.request.body.object_id;
 
-  const awsService = new AWSService()
-
+  
   const data = await awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType);
 
   try {
@@ -44,7 +45,6 @@ export async function createPhoto(ctx) {
         value: data.location
       });
 
-      console.log(attachment)
       const attachment_id = attachment.id;
 
       let attachment_lookup =  await to_attachments.create({

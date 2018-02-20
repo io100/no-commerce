@@ -6,7 +6,6 @@ export default (sequelize, DataTypes) => {
     value: DataTypes.STRING,
   }, {});
   attachments.associate = (models) => {
-    // associations can be defined here
   };
   return attachments;
 };
