@@ -36,7 +36,7 @@ export async function createPhoto(ctx) {
   
   const data = await awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType);
 
-  try {
+  try { 
 
       let attachment = await db.attachments.create({
         type: 'image',
