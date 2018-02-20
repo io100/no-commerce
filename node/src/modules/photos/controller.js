@@ -61,17 +61,29 @@ export async function createPhoto(ctx) {
 
 }
 
+/**
+ * @api {post} /photo/
+ * @apiPermission survey
+ * @apiVersion 1.0.0
+ * @apiName CreatePhoto
+ * @apiGroup Photos
+ *
+ * @apiExample Example usage:
+ * curl -H "Content-Type: application/json" -X POST localhost:5000/users/:id/photo
+ * 
+ * 
+ *  const data = {
+ *    url: saved_photo_url
+ *    OR
+ *    id: photo_id 
+ *  }
+ * 
+ */
 
 export async function deletePhoto(ctx) {
-  const base64EncodedImage =  ctx.request.body.data_uri;
-  const metaDataStringPosEnd = base64EncodedImage.indexOf('base64');
-  const trimmedBase64EncodedImage = base64EncodedImage.substring(metaDataStringPosEnd+7, base64EncodedImage.length-1);
-  const imageName = ctx.request.body.name;
-  const imageType = ctx.request.body.content_type;
-  const imageCategory = ctx.request.body.category;
-  const object_id = ctx.request.body.object_id;
+  const url =  ctx.request.body.data_uri;
   
-  const data = await awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType);
+
 
   try { 
 

@@ -38,6 +38,21 @@ class AWSService {
     })
 
   }
+
+  deletePhoto(filename) {
+   return new Promise((resolve, reject) => {
+      const params = {
+        'Bucket': bucketName,
+         'Key': `uploads/images/${filename}`
+       };
+
+       S3.deleteObject(params, (err, data) => {
+          console.log(data)
+          if(err) reject(err);
+          resolve(data);
+       });
+   })
+  }
 }
 
 export default AWSService;
