@@ -60,3 +60,40 @@ export async function createPhoto(ctx) {
   }
 
 }
+
+
+export async function deletePhoto(ctx) {
+  const base64EncodedImage =  ctx.request.body.data_uri;
+  const metaDataStringPosEnd = base64EncodedImage.indexOf('base64');
+  const trimmedBase64EncodedImage = base64EncodedImage.substring(metaDataStringPosEnd+7, base64EncodedImage.length-1);
+  const imageName = ctx.request.body.name;
+  const imageType = ctx.request.body.content_type;
+  const imageCategory = ctx.request.body.category;
+  const object_id = ctx.request.body.object_id;
+  
+  const data = await awsService.asyncUploadFileToS3(trimmedBase64EncodedImage, `no-comm-${Math.ceil(Math.random(0,1000000)*1000000)}-${imageName}`, imageType);
+
+  try { 
+
+      let attachment = await db.attachments.create({
+        type: 'image',
+        category: imageCategory,
+        value: data.Location
+      });
+
+      const attachment_id = attachment.id;
+      let attachment_lookup =  await db.to_attachments.create({
+        attachment_id: attachment_id,
+        object_id: object_id,
+        type: imageCategory
+      });
+
+    } catch (err) {
+      ctx.throw(422, err.message)
+    }
+
+  ctx.body = {
+    photo: data.Location
+  }
+
+}

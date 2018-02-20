@@ -11,5 +11,13 @@ export default [
       // ensureUser,
       photoController.createPhoto
     ]
+  },
+  {
+    method: 'DELETE',
+    route: '/',
+    handlers: [
+      // ensureUser,
+      photoController.deletePhoto
+    ]
   }
 ]
