@@ -57,8 +57,9 @@ export async function createPhoto(ctx) {
       ctx.throw(422, err.message)
     }
 
-  const response = 200;
-
+ 
+  ctx.status = 200;
+  
   ctx.body = {
     photo: ctx.request.body.photo,
   }
