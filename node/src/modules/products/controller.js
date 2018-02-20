@@ -1,4 +1,4 @@
-import *  as models from '../../../models';
+import db from '../../../models/index';
 
 
 /**
@@ -27,7 +27,7 @@ import *  as models from '../../../models';
 
 export async function getAllProducts(ctx) {
 
-   const products = await models.products.findAll({});
+   const products = await db.products.findAll({});
     
     ctx.status = 200;
     ctx.body = {
@@ -56,7 +56,7 @@ export async function addProduct(ctx) {
 
     const body = ctx.body;
 
-    const product = await models.products.create(...body);
+    const product = await db.products.create(...body);
 
     ctx.status = 201;
     ctx.body = {
@@ -84,7 +84,7 @@ export async function removeProduct(ctx) {
     
     const param = ctx.body.id ? {id: ctx.body.id} : {name: ctx.body.name};
 
-    const deleted_product = await models.products.destroy({
+    const deleted_product = await db.products.destroy({
         where: {param}
     })
 
@@ -113,7 +113,7 @@ export async function updateProduct(ctx) {
 
     const params = ctx.body;
 
-    const updated_product = await model.products.update(...params);
+    const updated_product = await db.products.update(...params);
 
     ctx.status = 200;
     ctx.body = {
