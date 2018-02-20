@@ -44,9 +44,8 @@ export async function createPhoto(ctx) {
         value: data.Location
       });
 
-      const attachment_id = attachment.id;
       let attachment_lookup =  await db.to_attachments.create({
-        attachment_id: attachment_id,
+        attachment_id: attachment.id,
         object_id: object_id,
         type: imageCategory
       });
@@ -81,31 +80,20 @@ export async function createPhoto(ctx) {
  */
 
 export async function deletePhoto(ctx) {
-  const url =  ctx.request.body.data_uri;
+  const filename =  ctx.request.body.url.split('/')[this.length-1];
   
-
-
   try { 
 
-      let attachment = await db.attachments.create({
-        type: 'image',
-        category: imageCategory,
-        value: data.Location
-      });
-
-      const attachment_id = attachment.id;
-      let attachment_lookup =  await db.to_attachments.create({
-        attachment_id: attachment_id,
-        object_id: object_id,
-        type: imageCategory
-      });
+     const data = await awsService.deletePhoto(filename);
+     const deleteFromAttachments = await db.attachments.destroy({where: {value: filename}});
+     const deletedFromToAttachments = await db.to_attachments.destroy({where: {attachment_id: deletedFromAttachments.id}});
 
     } catch (err) {
       ctx.throw(422, err.message)
     }
 
   ctx.body = {
-    photo: data.Location
+    status: 'deleted',
+    photo: deletedFromAttachments.value
   }
-
 }
