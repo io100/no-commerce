@@ -55,7 +55,7 @@ export async function getAllProducts(ctx) {
 export async function addProduct(ctx) {
 
     const body = ctx.body;
-
+    
     const product = await db.products.create(...body);
 
     ctx.status = 201;

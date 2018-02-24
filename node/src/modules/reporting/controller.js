@@ -1,4 +1,4 @@
-export async function helloWorld(ctx) {
+export async function create(ctx) {
   ctx.body = {
     status: 'hello world'
   }
