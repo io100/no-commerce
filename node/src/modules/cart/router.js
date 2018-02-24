@@ -31,7 +31,7 @@ export default [
     method: 'GET',
     route: '/:order_number',
     handlers: [
-      //ensureUser,
+      ensureUser,
       cartController.getOrderNumber
     ]
   },
