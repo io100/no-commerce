@@ -22,7 +22,7 @@ class userService {
                 }
             }
 
-            const salt = await getSalt()
+            const salt = await getSalt();
 
             bcrypt.hash(user.password, salt, (err, hash) => {
                 if (err) { reject(err) }
@@ -64,5 +64,5 @@ class userService {
 }
     
 
-  
+export default userService;
 

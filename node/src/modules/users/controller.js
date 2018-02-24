@@ -1,9 +1,10 @@
 import postmark from 'postmark';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-\import db from '../../../models/index';
+import db from '../../../models/index';
 import { isJsonString } from '../../utils/utils';
 import acl from '../auth/permissions';
+import userService from '../services/userService'
 
 /**
  * @api {delete} /users/:id Delete a user
@@ -183,5 +184,21 @@ export async function updateRole(ctx) {
 
   ctx.body = {
     saved
+  }
+}
+
+export async function createUser(ctx) {
+
+  const user_service = new userService();
+  
+  try {
+    const newUser = user_service.saveUser(ctx.body)
+  } catch (err) {
+    throw new Error(err)
+  }
+ 
+  ctx.status = 201;
+  ctx.body = {
+    ...user
   }
 }

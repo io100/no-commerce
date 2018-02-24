@@ -71,6 +71,13 @@ export default [
       ensureSystemUser,
       userController.updateRole
     ]
+  },
+  {
+    method: 'POST',
+    route: '/',
+    handlers: [
+      userController.createUser
+    ]
   }
 
 ]
