@@ -1,48 +1,14 @@
-import * as uesrs from '../../models/users'
-import config from '../../config'
-import { getToken } from '../utils/auth'
-import { verify } from 'jsonwebtoken'
+import apiAuthenticationService from '../services/apiAuthenticationService'
+
 
 export async function ensureUser (ctx, next) {
-  const token = getToken(ctx)
-  if (!token) {
-    ctx.throw(401)
-  }
+  const authService = new apiAuthenticationService();
 
-  let decoded = null
   try {
-    decoded = verify(token, config.token)
+    const result = await apiAuthenticationService.authUser(ctx);
+    return next(ctx);
   } catch (err) {
-    ctx.throw(401)
+    ctx.status = 401;
+    ctx.throw(err);
   }
-
-  ctx.state.user = await User.findById(decoded.id, '-password')
-  if (!ctx.state.user) {
-    ctx.throw(401)
-  }
-
-  return next()
-}
-
-
-export async function ensureSystemUser(ctx, next) {
-  const token = getToken(ctx)
-  if (!token) {
-    ctx.throw(401)
-  }
-
-  let decoded = null
-  try {
-    decoded = verify(token, config.token)
-  } catch (err) {
-    ctx.throw(401)
-  }
-
-  ctx.state.user = await User.findById(decoded.id, '-password')
-
-  if (!ctx.state.user || ctx.state.user.email !== 'system@no-commerce.com') {
-    ctx.throw(401)
-  }
-
-  return next()
 }

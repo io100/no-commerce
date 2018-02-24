@@ -1,4 +1,4 @@
-import { ensureUser, ensureSystemUser } from '../../middleware/validators';
+import { ensureUser } from '../../middleware/validators';
 import * as userController from './controller';
 import * as photoController from '../photos/controller';
 
@@ -68,7 +68,6 @@ export default [
     method: 'PUT',
     route: '/:id/role',
     handlers: [
-      ensureSystemUser,
       userController.updateRole
     ]
   },
