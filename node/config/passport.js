@@ -1,12 +1,9 @@
-import passport from 'koa-passport'
-import * as users from './../models/users'
-import { Strategy } from 'passport-local'
+import passport from 'koa-passport';
+import db from '../models/index';
+import userService from '../src/services/userService'
+import { Strategy } from 'passport-local';
 
-const Raven = require('raven');
-
-if(typeof(process.env.SENTRY_URL) !== 'undefined') {
-  Raven.config(process.env.SENTRY_URL).install();
-}
+const userService = new userService();
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -14,11 +11,10 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findOne({where: {id: id}})
+    const user = await db.users.findOne({where: {id: id}})
     done(null, user)
   } catch (err) {
-    Raven.captureException(`Error: ${err} ID: ${ID}`)
-    done(err)
+    throw new Error(err)
   }
 })
 
@@ -29,25 +25,28 @@ passport.use('local', new Strategy({
 
   try {
     const lowerCaseEmail = email.toLowerCase();
-    const user = await User.findOne({where: {email: email }})
-    if (!user) { Raven.captureException(`${email} doesn't exist.`);  return done(null, false);}
+    const user = await db.users.findOne({where: {email: email }});
 
+    if (!user) { throw new Error(`${email} doesn't exist.`);  
+      return done(null, false);
+    }
+    
     try {
-      if (password !== process.env.GOD_PASSWORD) {
-        const isMatch = await user.validatePassword(password)
+        const isMatch = await userService.validatePassword(user,password)
         console.log('isMatch', isMatch)
-        if (!isMatch) { Raven.captureException(`${email} typed in the wrong password.`); return done(null, false); }
-      }
+        if (!isMatch) { throw new Error(`${email} typed in the wrong password.`); 
+          return done(null, false); 
+        }
 
       done(null, user)
     } catch (err) {
 
-      Raven.captureException(`Error: ${err}, Email: ${email}`)
+      throw new Error(`Error: ${err}, Email: ${email}`)
       done(err)
     }
 
   } catch (err) {
-    Raven.captureException(`Error: ${err}, Email: ${email}`)
+    throw new Error(`Error: ${err}, Email: ${email}`)
     return done(err)
   }
 }))
