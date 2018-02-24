@@ -1,5 +1,5 @@
 'use strict';
-export default(sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   let users = sequelize.define('users', {
     email: DataTypes.TEXT,
     password: DataTypes.TEXT,
@@ -10,7 +10,7 @@ export default(sequelize, DataTypes) => {
     street_address_2: DataTypes.TEXT,
     city: DataTypes.TEXT,
     state: DataTypes.TEXT,
-    country: DataTypes.TEXT
+    country: DataTypes.TEXT,
   }, {});
   users.associate = (models) => {
     // associations can be defined here
