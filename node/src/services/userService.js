@@ -1,6 +1,7 @@
 import db from '../../../models/index';
-import {capitalizeFirstLetter} from '../utils/utils'
+import {capitalizeFirstLetter} from '../utils/utils';
 import bcrypt from 'bcrypt';
+import jwt from 'jwt';
 
 class userService {
    async saveUser(user) {
@@ -57,7 +58,7 @@ class userService {
 
     generateToken (user) {
         // TODO: Add role data for a user into the token here
-        return jwt.sign({ id: user.id }, config.token, { expiresIn: TOKEN_EXP_SECONDS })
+        return jwt.sign({ id: user.id }, config.token, { expiresIn: 3600 })
     }
         
 }
