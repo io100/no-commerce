@@ -2,8 +2,7 @@ import db from '../../../models/index'
 import AWSService from '../../utils/awsS3Api'
 
 /**
- * @api {post} /photo/
- * @apiPermission survey
+ * @api {POST} /photo/
  * @apiVersion 1.0.0
  * @apiName CreatePhoto
  * @apiGroup Photos
@@ -61,14 +60,13 @@ export async function createPhoto(ctx) {
 }
 
 /**
- * @api {post} /photo/
- * @apiPermission survey
+ * @api {DELETE} /photo/
  * @apiVersion 1.0.0
- * @apiName CreatePhoto
+ * @apiName Delete Photo
  * @apiGroup Photos
  *
  * @apiExample Example usage:
- * curl -H "Content-Type: application/json" -X POST localhost:5000/users/:id/photo
+ * curl -H "Content-Type: application/json" -X DELETE localhost:5000/photo
  * 
  * 
  *  const data = {
@@ -80,8 +78,8 @@ export async function createPhoto(ctx) {
  */
 
 export async function deletePhoto(ctx) {
-  const filename =  ctx.request.body.url.split('/')[this.length-1];
-  
+  const filename =  ctx.request.body.url.split('/').slice(-1);
+
   try { 
 
      const data = await awsService.deletePhoto(filename);
