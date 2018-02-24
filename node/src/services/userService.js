@@ -14,8 +14,8 @@ class userService {
             
             if (!doesUserExist) {
                 try {
-                user.first_name = capitalizeFirstLetter(user.first_name);
-                user.last_name = capitalizeFirstLetter(user.last_name);
+                    user.first_name = capitalizeFirstLetter(user.first_name);
+                    user.last_name = capitalizeFirstLetter(user.last_name);
                 } catch (err) {
                     reject('The user object requires both a first name and a last name.')
                 }
