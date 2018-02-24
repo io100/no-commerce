@@ -49,7 +49,7 @@ Visit `http://localhost:5000/docs/` to view docs
 
 ### No Commerce
 
-Hello, My name is Kyle and I’ve been an e-commerce developer off and on for a few years. Through my journey of building carts, I’ve realized that all of the existing solutions either
+Other E-Commerce Solutions:
 
 - Suck 
 - Don’t have the flexibility for skinning or themeing
