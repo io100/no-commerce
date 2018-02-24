@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('toOrders', {
+    return queryInterface.createTable('to_orders', {
       order_id: {
         type: Sequelize.INTEGER
       },
@@ -19,6 +19,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('toOrders');
+    return queryInterface.dropTable('to_orders');
   }
 };
