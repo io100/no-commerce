@@ -1,6 +1,6 @@
 'use strict';
 export default (sequelize, DataTypes) => {
-  let toOrders = sequelize.define('to_orders', {
+  let toOrders = sequelize.define('users_orders', {
     order_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER
   }, {});
