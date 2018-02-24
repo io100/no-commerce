@@ -1,8 +1,7 @@
 import postmark from 'postmark';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import user from '../../../models/users';
-import promotions from '../../../models/users';
+\import db from '../../../models/index';
 import { isJsonString } from '../../utils/utils';
 import acl from '../auth/permissions';
 
@@ -47,7 +46,7 @@ export async function changePassword(ctx) {
     throw new Error('Password and confirm password do not match');
   }
 
-  const user = await User.findOne({where: {id:ctx.params.id}});
+  const user = await db.users.findOne({where: {id:ctx.params.id}});
 
   user.password = newPassword;
 
@@ -78,7 +77,7 @@ export async function forgotPassword(ctx, next) {
       resolve(token);
     });
   }).then(async (token) => {
-    const user = await User.findOne({where: {email: ctx.request.body.email }});
+    const user = await db.user.findOne({where: {email: ctx.request.body.email }});
     console.log(`A reset password token has been generated for ${user.email}`);
 
     if (!user) {
@@ -126,7 +125,7 @@ export async function forgotPassword(ctx, next) {
 * We will use the response from this request in order to check if we should even render the form for resetting
 */
 export async function canUserResetPasword(ctx) {
-  const user = await user.findOne({ where: {reset_password_token: ctx.request.body.resetPasswordToken, reset_token_expiration: { gte: Date.now() }}});
+  const user = await db.users.findOne({ where: {reset_password_token: ctx.request.body.resetPasswordToken, reset_token_expiration: { gte: Date.now() }}});
   if (!user) {
     ctx.throw(404);
   }
@@ -145,7 +144,7 @@ export async function canUserResetPasword(ctx) {
 */
 
 export async function resetPassword(ctx) {
-  const user = await promotions.findOne({ reset_password_token: ctx.request.body.resetPasswordToken, reset_token_expires: { gte: Date.now() } });
+  const user = await db.users.findOne({ reset_password_token: ctx.request.body.resetPasswordToken, reset_token_expires: { gte: Date.now() } });
   if (!user) {
     ctx.throw(404);
   }
@@ -176,7 +175,7 @@ export async function updateRole(ctx) {
   const id = ctx.request.body.id
   const role = ctx.request.body.role
 
-  const user = await User.findByOne({where: {id: id}});
+  const user = await db.users.findByOne({where: {id: id}});
 
   user.role = role;
 
