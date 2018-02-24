@@ -4,11 +4,8 @@ export function helloWorld(ctx) {
     ctx.body = 'Hello World'
 }
 
-
-
 export function findOrder(ctx) {
     const order_number = ctx.params.order_number;
-
     const order_data = db.orders.findOne({where: {id: order_number}});
 
     ctx.body = {
@@ -32,7 +29,7 @@ export function createOrder(ctx) {
 
 export function addToOrder(ctx) {
 
-    
+
 
 }
 

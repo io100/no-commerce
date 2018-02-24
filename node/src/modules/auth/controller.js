@@ -51,7 +51,6 @@ import passport from 'koa-passport'
  */
 
 export async function authUser (ctx, next) {
-  console.log('CTX', ctx);
   return passport.authenticate('local', (user) => {
     console.log(user)
     if (!user) {
@@ -74,6 +73,5 @@ export async function authUser (ctx, next) {
       exp: time,
       user: response
     }
-    console.log(ctx)
   })(ctx, next)
 }

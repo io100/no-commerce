@@ -28,6 +28,7 @@ authorizeCreditCard(obj) {
         orderDetails.setDescription('Product Description');
 
         const order_info = await db.orders.findOne({where: {id: obj.id}});
+        const user_info
 
 
         var tax = new ApiContracts.ExtendedAmountType();
