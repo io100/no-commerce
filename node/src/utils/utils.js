@@ -81,6 +81,6 @@ return regex.test(url);
 
 
 
-export function invoiceNumberGenerator(id){ 
+export function invoiceNumberGenerator(id) { 
   return `NO${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${id}`
 }
