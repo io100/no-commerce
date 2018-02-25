@@ -15,7 +15,6 @@ class GatewayService {
 
     authenticate(data){
       
-
     }
 
     chargeCustomer(data) {
