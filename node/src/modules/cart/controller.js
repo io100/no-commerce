@@ -1,4 +1,5 @@
 import db from '../../models/index'
+import {invoiceNumberGenerator} from '../../utils/utils'
 
 export function helloWorld(ctx) {
     ctx.body = 'Hello World'
@@ -16,8 +17,10 @@ export function findOrder(ctx) {
 export function createOrder(ctx) {
 
     let order = ctx.request.body;
-    order.status = 'created'
-    order.invoice_number = 
+    const customer_id = ctx.request.body.customer_id;
+
+    order.status = 'created';
+    order.invoice_number = invoiceNumberGenerator(customer_id);
     
     const order_data = db.orders.create(...order);
 
