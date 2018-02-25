@@ -79,10 +79,8 @@ const regex = /^((https?|ftp):\/\/)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\
 return regex.test(url);
 }
 
-export function objectIdFromDate(date) {
-	return Math.floor(date.getTime() / 1000).toString(16) + "0000000000000000";
-}
 
-export function dateFromObjectId(objectId) {
-	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+
+export function invoiceNumberGenerator(id){ 
+  return `NO${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${Math.floor(Math.random() * 20)}${id}`
 }

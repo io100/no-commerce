@@ -17,8 +17,9 @@ export function createOrder(ctx) {
 
     let order = ctx.request.body;
     order.status = 'created'
+    order.invoice_number = 
     
-    const order = db.orders.create(...order);
+    const order_data = db.orders.create(...order);
 
     ctx.status = 201;
     ctx.body = {

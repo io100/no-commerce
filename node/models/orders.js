@@ -2,6 +2,7 @@
 export default (sequelize, DataTypes) => {
   let orders = sequelize.define('orders', {
     user_id: DataTypes.INTEGER,
+    invoice_number: DataTypes.STRING,
     billing_address_id: DataTypes.INTEGER,
     shipping_address_id: DataTypes.INTEGER,
     products: DataTypes.ARRAY(DataTypes.INTEGER),
